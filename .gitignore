@@ -1,0 +1,10 @@
+*.test
+*.exe
+*.gguf
+.vscode/
+.idea/
+.DS_Store
+.env
+_bmad/
+_bmad-output/
+.claude/
