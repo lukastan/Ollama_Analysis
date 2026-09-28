@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>manifest: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github.com/ollama/ollama/manifest/layer.go (0.0%)</option>
+				
+				<option value="file1">github.com/ollama/ollama/manifest/manifest.go (30.3%)</option>
+				
+				<option value="file2">github.com/ollama/ollama/manifest/paths.go (7.3%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package manifest
+
+import (
+        "crypto/sha256"
+        "errors"
+        "fmt"
+        "io"
+        "os"
+        "time"
+)
+
+type Layer struct {
+        MediaType string `json:"mediaType"`
+        Digest    string `json:"digest"`
+        Size      int64  `json:"size"`
+        From      string `json:"from,omitempty"`
+        Name      string `json:"name,omitempty"` // tensor name, e.g., "text_encoder/model.embed_tokens.weight"
+        Status    string `json:"-"`
+}
+
+const (
+        MediaTypeImageTensor = "application/vnd.ollama.image.tensor"
+        MediaTypeImageDraft  = "application/vnd.ollama.image.draft"
+)
+
+func NewLayer(r io.Reader, mediatype string) (Layer, error) <span class="cov0" title="0">{
+        blobs, err := BlobsPath("")
+        if err != nil </span><span class="cov0" title="0">{
+                return Layer{}, err
+        }</span>
+
+        <span class="cov0" title="0">temp, err := os.CreateTemp(blobs, "sha256-")
+        if err != nil </span><span class="cov0" title="0">{
+                return Layer{}, err
+        }</span>
+        <span class="cov0" title="0">defer temp.Close()
+        defer os.Remove(temp.Name())
+
+        sha256sum := sha256.New()
+        n, err := io.Copy(io.MultiWriter(temp, sha256sum), r)
+        if err != nil </span><span class="cov0" title="0">{
+                return Layer{}, err
+        }</span>
+
+        <span class="cov0" title="0">if err := temp.Close(); err != nil </span><span class="cov0" title="0">{
+                return Layer{}, err
+        }</span>
+
+        <span class="cov0" title="0">digest := fmt.Sprintf("sha256:%x", sha256sum.Sum(nil))
+        blob, err := BlobsPath(digest)
+        if err != nil </span><span class="cov0" title="0">{
+                return Layer{}, err
+        }</span>
+
+        <span class="cov0" title="0">status := "using existing layer"
+        if _, err := os.Stat(blob); err != nil </span><span class="cov0" title="0">{
+                status = "creating new layer"
+                if err := os.Rename(temp.Name(), blob); err != nil </span><span class="cov0" title="0">{
+                        return Layer{}, err
+                }</span>
+                <span class="cov0" title="0">if err := os.Chmod(blob, 0o644); err != nil </span><span class="cov0" title="0">{
+                        return Layer{}, err
+                }</span>
+        }
+        <span class="cov0" title="0">if err := touchLayer(blob); err != nil </span><span class="cov0" title="0">{
+                return Layer{}, err
+        }</span>
+
+        <span class="cov0" title="0">return Layer{
+                MediaType: mediatype,
+                Digest:    digest,
+                Size:      n,
+                Status:    fmt.Sprintf("%s %s", status, digest),
+        }, nil</span>
+}
+
+func NewLayerFromLayer(digest, mediatype, from string) (Layer, error) <span class="cov0" title="0">{
+        if digest == "" </span><span class="cov0" title="0">{
+                return Layer{}, errors.New("creating new layer from layer with empty digest")
+        }</span>
+
+        <span class="cov0" title="0">blob, err := BlobsPath(digest)
+        if err != nil </span><span class="cov0" title="0">{
+                return Layer{}, err
+        }</span>
+
+        <span class="cov0" title="0">fi, err := os.Stat(blob)
+        if err != nil </span><span class="cov0" title="0">{
+                return Layer{}, err
+        }</span>
+        <span class="cov0" title="0">if err := touchLayer(blob); err != nil </span><span class="cov0" title="0">{
+                return Layer{}, err
+        }</span>
+
+        <span class="cov0" title="0">return Layer{
+                MediaType: mediatype,
+                Digest:    digest,
+                Size:      fi.Size(),
+                From:      from,
+                Status:    fmt.Sprintf("using existing layer %s", digest),
+        }, nil</span>
+}
+
+func touchLayer(path string) error <span class="cov0" title="0">{
+        now := time.Now()
+        return os.Chtimes(path, now, now)
+}</span>
+
+func (l *Layer) Open() (io.ReadSeekCloser, error) <span class="cov0" title="0">{
+        if l.Digest == "" </span><span class="cov0" title="0">{
+                return nil, errors.New("opening layer with empty digest")
+        }</span>
+
+        <span class="cov0" title="0">blob, err := BlobsPath(l.Digest)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">return os.Open(blob)</span>
+}
+
+func (l *Layer) Remove() error <span class="cov0" title="0">{
+        if l.Digest == "" </span><span class="cov0" title="0">{
+                return nil
+        }</span>
+
+        // Ignore corrupt manifests to avoid blocking deletion of layers that are freshly orphaned
+        <span class="cov0" title="0">ms, err := Manifests(true)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">for _, m := range ms </span><span class="cov0" title="0">{
+                for _, layer := range append(m.Layers, m.Config) </span><span class="cov0" title="0">{
+                        if layer.Digest == l.Digest </span><span class="cov0" title="0">{
+                                // something is using this layer
+                                return nil
+                        }</span>
+                }
+        }
+
+        <span class="cov0" title="0">blob, err := BlobsPath(l.Digest)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">return os.Remove(blob)</span>
+}
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package manifest
+
+import (
+        "crypto/sha256"
+        "encoding/hex"
+        "encoding/json"
+        "fmt"
+        "io"
+        "log/slog"
+        "os"
+        "path/filepath"
+
+        "github.com/ollama/ollama/types/model"
+)
+
+type Manifest struct {
+        SchemaVersion int     `json:"schemaVersion"`
+        MediaType     string  `json:"mediaType"`
+        Config        Layer   `json:"config"`
+        Layers        []Layer `json:"layers"`
+
+        filepath string
+        fi       os.FileInfo
+        digest   string
+}
+
+func (m *Manifest) Size() (size int64) <span class="cov0" title="0">{
+        for _, layer := range append(m.Layers, m.Config) </span><span class="cov0" title="0">{
+                size += layer.Size
+        }</span>
+
+        <span class="cov0" title="0">return</span>
+}
+
+func (m *Manifest) Digest() string <span class="cov0" title="0">{
+        return m.digest
+}</span>
+
+func (m *Manifest) FileInfo() os.FileInfo <span class="cov0" title="0">{
+        return m.fi
+}</span>
+
+// ConfigLayer returns the JSON layer stored under configPath.
+func (m *Manifest) ConfigLayer(configPath string) (Layer, bool) <span class="cov0" title="0">{
+        for _, layer := range m.Layers </span><span class="cov0" title="0">{
+                if layer.MediaType == "application/vnd.ollama.image.json" &amp;&amp; layer.Name == configPath </span><span class="cov0" title="0">{
+                        return layer, true
+                }</span>
+        }
+        <span class="cov0" title="0">return Layer{}, false</span>
+}
+
+// ReadConfig returns the contents of the JSON layer stored under configPath.
+func (m *Manifest) ReadConfig(configPath string) ([]byte, error) <span class="cov0" title="0">{
+        layer, ok := m.ConfigLayer(configPath)
+        if !ok </span><span class="cov0" title="0">{
+                return nil, fmt.Errorf("config %q not found in manifest", configPath)
+        }</span>
+        <span class="cov0" title="0">blobPath, err := BlobsPath(layer.Digest)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return os.ReadFile(blobPath)</span>
+}
+
+// ReadConfigJSON reads and unmarshals a config layer as JSON.
+func (m *Manifest) ReadConfigJSON(configPath string, v any) error <span class="cov0" title="0">{
+        data, err := m.ReadConfig(configPath)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">return json.Unmarshal(data, v)</span>
+}
+
+// TensorLayers returns the layers holding tensor data.
+func (m *Manifest) TensorLayers() []Layer <span class="cov0" title="0">{
+        var layers []Layer
+        for _, layer := range m.Layers </span><span class="cov0" title="0">{
+                if layer.MediaType == MediaTypeImageTensor </span><span class="cov0" title="0">{
+                        layers = append(layers, layer)
+                }</span>
+        }
+        <span class="cov0" title="0">return layers</span>
+}
+
+func (m *Manifest) Remove() error <span class="cov0" title="0">{
+        if err := os.Remove(m.filepath); err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">manifests, err := Path()
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">return PruneDirectory(manifests)</span>
+}
+
+// RemoveLayers deletes the layers no other manifest references. The digests it
+// removed are returned even alongside an error, so callers can clean up
+// anything derived from them.
+func (m *Manifest) RemoveLayers() ([]string, error) <span class="cov0" title="0">{
+        ms, err := Manifests(true)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        // Build set of digests still in use by other manifests
+        <span class="cov0" title="0">inUse := make(map[string]struct{})
+        for _, other := range ms </span><span class="cov0" title="0">{
+                for _, layer := range append(other.Layers, other.Config) </span><span class="cov0" title="0">{
+                        if layer.Digest != "" </span><span class="cov0" title="0">{
+                                inUse[layer.Digest] = struct{}{}
+                        }</span>
+                }
+        }
+
+        // Remove layers not used by any other manifest
+        <span class="cov0" title="0">var removed []string
+        for _, layer := range append(m.Layers, m.Config) </span><span class="cov0" title="0">{
+                if layer.Digest == "" </span><span class="cov0" title="0">{
+                        continue</span>
+                }
+                <span class="cov0" title="0">if _, used := inUse[layer.Digest]; used </span><span class="cov0" title="0">{
+                        continue</span>
+                }
+                <span class="cov0" title="0">blob, err := BlobsPath(layer.Digest)
+                if err != nil </span><span class="cov0" title="0">{
+                        return removed, err
+                }</span>
+                <span class="cov0" title="0">if err := os.Remove(blob); os.IsNotExist(err) </span><span class="cov0" title="0">{
+                        slog.Debug("layer does not exist", "digest", layer.Digest)
+                }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                        return removed, err
+                }</span>
+                <span class="cov0" title="0">removed = append(removed, layer.Digest)</span>
+        }
+
+        <span class="cov0" title="0">return removed, nil</span>
+}
+
+func ParseNamedManifest(n model.Name) (*Manifest, error) <span class="cov8" title="1">{
+        if !n.IsFullyQualified() </span><span class="cov0" title="0">{
+                return nil, model.Unqualified(n)
+        }</span>
+
+        <span class="cov8" title="1">manifests, err := Path()
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">p := filepath.Join(manifests, n.Filepath())
+
+        var m Manifest
+        f, err := os.Open(p)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">defer f.Close()
+
+        fi, err := f.Stat()
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">sha256sum := sha256.New()
+        if err := json.NewDecoder(io.TeeReader(f, sha256sum)).Decode(&amp;m); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">m.filepath = p
+        m.fi = fi
+        m.digest = hex.EncodeToString(sha256sum.Sum(nil))
+
+        return &amp;m, nil</span>
+}
+
+func WriteManifest(name model.Name, config Layer, layers []Layer) error <span class="cov0" title="0">{
+        manifests, err := Path()
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">p := filepath.Join(manifests, name.Filepath())
+        if err := os.MkdirAll(filepath.Dir(p), 0o755); err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">f, err := os.Create(p)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">defer f.Close()
+
+        m := Manifest{
+                SchemaVersion: 2,
+                MediaType:     "application/vnd.docker.distribution.manifest.v2+json",
+                Config:        config,
+                Layers:        layers,
+        }
+
+        return json.NewEncoder(f).Encode(m)</span>
+}
+
+func Manifests(continueOnError bool) (map[model.Name]*Manifest, error) <span class="cov8" title="1">{
+        manifests, err := Path()
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        // TODO(mxyng): use something less brittle
+        <span class="cov8" title="1">matches, err := filepath.Glob(filepath.Join(manifests, "*", "*", "*", "*"))
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">ms := make(map[model.Name]*Manifest)
+        for _, match := range matches </span><span class="cov8" title="1">{
+                fi, err := os.Stat(match)
+                if err != nil </span><span class="cov0" title="0">{
+                        return nil, err
+                }</span>
+
+                <span class="cov8" title="1">if !fi.IsDir() </span><span class="cov8" title="1">{
+                        rel, err := filepath.Rel(manifests, match)
+                        if err != nil </span><span class="cov0" title="0">{
+                                if !continueOnError </span><span class="cov0" title="0">{
+                                        return nil, fmt.Errorf("%s %w", match, err)
+                                }</span>
+                                <span class="cov0" title="0">slog.Warn("bad filepath", "path", match, "error", err)
+                                continue</span>
+                        }
+
+                        <span class="cov8" title="1">n := model.ParseNameFromFilepath(rel)
+                        if !n.IsValid() </span><span class="cov8" title="1">{
+                                if !continueOnError </span><span class="cov0" title="0">{
+                                        return nil, fmt.Errorf("%s %w", rel, err)
+                                }</span>
+                                <span class="cov8" title="1">slog.Warn("bad manifest name", "path", rel)
+                                continue</span>
+                        }
+
+                        <span class="cov8" title="1">m, err := ParseNamedManifest(n)
+                        if err != nil </span><span class="cov0" title="0">{
+                                if !continueOnError </span><span class="cov0" title="0">{
+                                        return nil, fmt.Errorf("%s %w", n, err)
+                                }</span>
+                                <span class="cov0" title="0">slog.Warn("bad manifest", "name", n, "error", err)
+                                continue</span>
+                        }
+
+                        <span class="cov8" title="1">ms[n] = m</span>
+                }
+        }
+
+        <span class="cov8" title="1">return ms, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package manifest
+
+import (
+        "errors"
+        "fmt"
+        "os"
+        "path/filepath"
+        "regexp"
+        "strings"
+
+        "github.com/ollama/ollama/envconfig"
+        "github.com/ollama/ollama/types/model"
+)
+
+var ErrInvalidDigestFormat = errors.New("invalid digest format")
+
+// a manifest spells a digest with ":", a filename with "-"
+var digestPattern = regexp.MustCompile(`^sha256[:-][0-9a-fA-F]{64}$`)
+
+// ValidateDigest reports whether digest names a blob.
+func ValidateDigest(digest string) error <span class="cov0" title="0">{
+        if !digestPattern.MatchString(digest) </span><span class="cov0" title="0">{
+                return ErrInvalidDigestFormat
+        }</span>
+
+        <span class="cov0" title="0">return nil</span>
+}
+
+func Path() (string, error) <span class="cov8" title="1">{
+        path := filepath.Join(envconfig.Models(), "manifests")
+        if err := os.MkdirAll(path, 0o755); err != nil </span><span class="cov0" title="0">{
+                return "", fmt.Errorf("%w: ensure path elements are traversable", err)
+        }</span>
+
+        <span class="cov8" title="1">return path, nil</span>
+}
+
+// PathForName returns the path to the manifest file for a specific model name.
+func PathForName(n model.Name) (string, error) <span class="cov0" title="0">{
+        if !n.IsValid() </span><span class="cov0" title="0">{
+                return "", os.ErrNotExist
+        }</span>
+
+        <span class="cov0" title="0">manifests, err := Path()
+        if err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+
+        <span class="cov0" title="0">return filepath.Join(manifests, n.Filepath()), nil</span>
+}
+
+func BlobsPath(digest string) (string, error) <span class="cov0" title="0">{
+        // the empty digest names the blobs directory
+        if digest != "" </span><span class="cov0" title="0">{
+                if err := ValidateDigest(digest); err != nil </span><span class="cov0" title="0">{
+                        return "", err
+                }</span>
+        }
+
+        <span class="cov0" title="0">digest = strings.ReplaceAll(digest, ":", "-")
+        path := filepath.Join(envconfig.Models(), "blobs", digest)
+        dirPath := filepath.Dir(path)
+        if digest == "" </span><span class="cov0" title="0">{
+                dirPath = path
+        }</span>
+
+        <span class="cov0" title="0">if err := os.MkdirAll(dirPath, 0o755); err != nil </span><span class="cov0" title="0">{
+                return "", fmt.Errorf("%w: ensure path elements are traversable", err)
+        }</span>
+
+        <span class="cov0" title="0">return path, nil</span>
+}
+
+// PruneDirectory removes empty directories recursively.
+func PruneDirectory(path string) error <span class="cov0" title="0">{
+        info, err := os.Lstat(path)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">if info.IsDir() &amp;&amp; info.Mode()&amp;os.ModeSymlink == 0 </span><span class="cov0" title="0">{
+                entries, err := os.ReadDir(path)
+                if err != nil </span><span class="cov0" title="0">{
+                        return err
+                }</span>
+
+                <span class="cov0" title="0">for _, entry := range entries </span><span class="cov0" title="0">{
+                        if err := PruneDirectory(filepath.Join(path, entry.Name())); err != nil </span><span class="cov0" title="0">{
+                                return err
+                        }</span>
+                }
+
+                <span class="cov0" title="0">entries, err = os.ReadDir(path)
+                if err != nil </span><span class="cov0" title="0">{
+                        return err
+                }</span>
+
+                <span class="cov0" title="0">if len(entries) &gt; 0 </span><span class="cov0" title="0">{
+                        return nil
+                }</span>
+
+                <span class="cov0" title="0">return os.Remove(path)</span>
+        }
+
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
