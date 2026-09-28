@@ -1,0 +1,17 @@
+CMAKE_BUILD_TYPE=Release
+CMake Warning (dev) at CMakeLists.txt:614 (install):
+  Target ggml has PUBLIC_HEADER files but no PUBLIC_HEADER DESTINATION.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at CMakeLists.txt:614 (install):
+  Target llama has PUBLIC_HEADER files but no PUBLIC_HEADER DESTINATION.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at CMakeLists.txt:614 (install):
+  Target mtmd has PRIVATE_HEADER files but no PRIVATE_HEADER DESTINATION.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at CMakeLists.txt:614 (install):
+  Target mtmd has PUBLIC_HEADER files but no PUBLIC_HEADER DESTINATION.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+

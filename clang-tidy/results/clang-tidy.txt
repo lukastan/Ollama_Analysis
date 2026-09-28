@@ -1,0 +1,334 @@
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:27:39: warning: 2 adjacent parameters of 'copy_u32_kv' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+   27 | void copy_u32_kv(gguf_context * meta, const char * src, const char * dst) {
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:27:52: note: the first parameter in the range is 'src'
+   27 | void copy_u32_kv(gguf_context * meta, const char * src, const char * dst) {
+      |                                                    ^~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:27:70: note: the last parameter in the range is 'dst'
+   27 | void copy_u32_kv(gguf_context * meta, const char * src, const char * dst) {
+      |                                                                      ^~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:34:39: warning: 2 adjacent parameters of 'copy_f32_kv' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+   34 | void copy_f32_kv(gguf_context * meta, const char * src, const char * dst) {
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:34:52: note: the first parameter in the range is 'src'
+   34 | void copy_f32_kv(gguf_context * meta, const char * src, const char * dst) {
+      |                                                    ^~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:34:70: note: the last parameter in the range is 'dst'
+   34 | void copy_f32_kv(gguf_context * meta, const char * src, const char * dst) {
+      |                                                                      ^~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:41:35: warning: 2 adjacent parameters of 'copy_kv' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+   41 | void copy_kv(gguf_context * meta, const char * src, const char * dst) {
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:41:48: note: the first parameter in the range is 'src'
+   41 | void copy_kv(gguf_context * meta, const char * src, const char * dst) {
+      |                                                ^~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:41:66: note: the last parameter in the range is 'dst'
+   41 | void copy_kv(gguf_context * meta, const char * src, const char * dst) {
+      |                                                                  ^~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:79:44: warning: 2 adjacent parameters of 'rename_kv_prefix' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+   79 | void rename_kv_prefix(gguf_context * meta, const char * old_prefix,
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~~~
+   80 |                       const char * new_prefix) {
+      |                       ~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:79:57: note: the first parameter in the range is 'old_prefix'
+   79 | void rename_kv_prefix(gguf_context * meta, const char * old_prefix,
+      |                                                         ^~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:80:36: note: the last parameter in the range is 'new_prefix'
+   80 |                       const char * new_prefix) {
+      |                                    ^~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:155:20: warning: 2 adjacent parameters of 'rename_tensor' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+  155 |                    const char * old_name, const char * new_name) {
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:155:33: note: the first parameter in the range is 'old_name'
+  155 |                    const char * old_name, const char * new_name) {
+      |                                 ^~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:155:56: note: the last parameter in the range is 'new_name'
+  155 |                    const char * old_name, const char * new_name) {
+      |                                                        ^~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:166:32: warning: 2 adjacent parameters of 'rename_tensors_containing' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+  166 |                                const char * needle, const char * replacement) {
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:166:45: note: the first parameter in the range is 'needle'
+  166 |                                const char * needle, const char * replacement) {
+      |                                             ^~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:166:66: note: the last parameter in the range is 'replacement'
+  166 |                                const char * needle, const char * replacement) {
+      |                                                                  ^~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:280:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  280 |         std::fprintf(stderr, "%s: open failed path=%s offset=%zu size=%zu errno=%d (%s)\n",
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  281 |                      __func__, path, offset, size, errno, std::strerror(errno));
+      |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:280:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:292:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  292 |         std::fprintf(stderr, "%s: seek failed path=%s offset=%zu size=%zu errno=%d (%s)\n",
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  293 |                      __func__, path, offset, size, errno, std::strerror(errno));
+      |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:292:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:294:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  294 |         std::fclose(f);
+      |         ^~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:294:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:301:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  301 |         std::fprintf(stderr, "%s: read failed path=%s offset=%zu size=%zu got=%zu errno=%d (%s) ferror=%d\n",
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  302 |                      __func__, path, offset, size, n, errno, std::strerror(errno), std::ferror(f));
+      |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:301:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:304:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  304 |     std::fclose(f);
+      |     ^~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat-util.cpp:304:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:47:41: warning: 2 adjacent parameters of 'record_transform_timing' of convertible types are easily swapped by mistake [bugprone-easily-swappable-parameters]
+   47 | TransformTiming record_transform_timing(size_t bytes, double ms) {
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:47:48: note: the first parameter in the range is 'bytes'
+   47 | TransformTiming record_transform_timing(size_t bytes, double ms) {
+      |                                                ^~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:47:62: note: the last parameter in the range is 'ms'
+   47 | TransformTiming record_transform_timing(size_t bytes, double ms) {
+      |                                                              ^~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:47:41: note: 
+   47 | TransformTiming record_transform_timing(size_t bytes, double ms) {
+      |                                         ^
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:47:55: note: 'size_t' and 'double' may be implicitly converted: 'size_t' (as 'unsigned long') -> 'double', 'double' -> 'size_t' (as 'unsigned long')
+   47 | TransformTiming record_transform_timing(size_t bytes, double ms) {
+      |                                                       ^
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:174:50: warning: 2 adjacent parameters of 'string_kv_equals' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+  174 | bool string_kv_equals(const gguf_context * meta, const char * key, const char * want) {
+      |                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:174:63: note: the first parameter in the range is 'key'
+  174 | bool string_kv_equals(const gguf_context * meta, const char * key, const char * want) {
+      |                                                               ^~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:174:81: note: the last parameter in the range is 'want'
+  174 | bool string_kv_equals(const gguf_context * meta, const char * key, const char * want) {
+      |                                                                                 ^~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:182:52: warning: 2 adjacent parameters of 'string_kv_contains' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+  182 | bool string_kv_contains(const gguf_context * meta, const char * key, const char * needle) {
+      |                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:182:65: note: the first parameter in the range is 'key'
+  182 | bool string_kv_contains(const gguf_context * meta, const char * key, const char * needle) {
+      |                                                                 ^~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:182:83: note: the last parameter in the range is 'needle'
+  182 | bool string_kv_contains(const gguf_context * meta, const char * key, const char * needle) {
+      |                                                                                   ^~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:683:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  683 |     std::snprintf(prefix, sizeof(prefix), "mtp.layers.%u.mlp.experts.", mtp_index);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:683:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:715:42: warning: 2 adjacent parameters of 'register_qwen35moe_mtp_expert_merge' of similar type ('uint32_t') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+  715 |                                          uint32_t mtp_index, uint32_t block,
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:715:51: note: the first parameter in the range is 'mtp_index'
+  715 |                                          uint32_t mtp_index, uint32_t block,
+      |                                                   ^~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:715:71: note: the last parameter in the range is 'block'
+  715 |                                          uint32_t mtp_index, uint32_t block,
+      |                                                                       ^~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:716:42: warning: 2 adjacent parameters of 'register_qwen35moe_mtp_expert_merge' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+  716 |                                          const char * src_suffix,
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~
+  717 |                                          const char * dst_suffix) {
+      |                                          ~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:716:55: note: the first parameter in the range is 'src_suffix'
+  716 |                                          const char * src_suffix,
+      |                                                       ^~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:717:55: note: the last parameter in the range is 'dst_suffix'
+  717 |                                          const char * dst_suffix) {
+      |                                                       ^~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:749:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  749 |     std::snprintf(dest, sizeof(dest), "blk.%u.%s", block, dst_suffix);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:749:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:760:41: warning: 2 adjacent parameters of 'merge_qwen35moe_mtp_expert_tensors' of similar type ('uint32_t') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+  760 |                                         uint32_t base_block, uint32_t nextn) {
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:760:50: note: the first parameter in the range is 'base_block'
+  760 |                                         uint32_t base_block, uint32_t nextn) {
+      |                                                  ^~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:760:71: note: the last parameter in the range is 'nextn'
+  760 |                                         uint32_t base_block, uint32_t nextn) {
+      |                                                                       ^~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:800:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  800 |         std::snprintf(dest, sizeof(dest), "blk.%u.%s", base_block + mtp_index, suffix.c_str());
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:800:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:822:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  822 |         std::snprintf(dest, sizeof(dest), "blk.%u.%s", base_block, suffix);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:822:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:987:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  987 |     std::snprintf(gate_scale,       sizeof(gate_scale),       "blk.%u.ffn_gate_exps.scale",       b);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:987:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:988:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  988 |     std::snprintf(gate_input_scale, sizeof(gate_input_scale), "blk.%u.ffn_gate_exps.input_scale", b);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:988:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:989:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  989 |     std::snprintf(up_scale,         sizeof(up_scale),         "blk.%u.ffn_up_exps.scale",         b);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:989:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:990:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+  990 |     std::snprintf(up_input_scale,   sizeof(up_input_scale),   "blk.%u.ffn_up_exps.input_scale",   b);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:990:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1087:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1087 |         std::snprintf(gate,    sizeof(gate),    "blk.%u.ffn_gate_exps.weight",    b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1087:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1088:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1088 |         std::snprintf(up,      sizeof(up),      "blk.%u.ffn_up_exps.weight",      b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1088:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1089:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1089 |         std::snprintf(gate_up, sizeof(gate_up), "blk.%u.ffn_gate_up_exps.weight", b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1089:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1090:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1090 |         std::snprintf(scale,      sizeof(scale),      "blk.%u.ffn_gate_inp.per_expert_scale", b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1090:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1091:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1091 |         std::snprintf(down_scale, sizeof(down_scale), "blk.%u.ffn_down_exps.scale",           b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1091:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1201:13: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1201 |             std::snprintf(name, sizeof(name), "blk.%u.ffn_latent_in.weight", b);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1201:13: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1394:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1394 |     std::snprintf(gate_n, sizeof(gate_n), "blk.%d.ffn_gate.weight", block_idx);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1394:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1395:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1395 |     std::snprintf(up_n,   sizeof(up_n),   "blk.%d.ffn_up.weight",   block_idx);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1395:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1476:13: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1476 |             std::snprintf(skip_pref, sizeof(skip_pref), "blk.%u.ffn_gate.", b);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1476:13: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1926:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1926 |     std::snprintf(q,     sizeof(q),     "v.blk.%d.attn_q.weight",   block_idx);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1926:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1927:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1927 |     std::snprintf(k,     sizeof(k),     "v.blk.%d.attn_k.weight",   block_idx);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1927:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1928:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1928 |     std::snprintf(v,     sizeof(v),     "v.blk.%d.attn_v.weight",   block_idx);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1928:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1929:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1929 |     std::snprintf(qbias, sizeof(qbias), "v.blk.%d.attn_q.bias",     block_idx);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1929:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1930:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1930 |     std::snprintf(kbias, sizeof(kbias), "v.blk.%d.attn_k.bias",     block_idx);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1930:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1931:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1931 |     std::snprintf(vbias, sizeof(vbias), "v.blk.%d.attn_v.bias",     block_idx);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1931:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1932:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1932 |     std::snprintf(qkv_w, sizeof(qkv_w), "v.blk.%d.attn_qkv.weight", block_idx);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1932:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1933:5: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 1933 |     std::snprintf(qkv_b, sizeof(qkv_b), "v.blk.%d.attn_qkv.bias",   block_idx);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:1933:5: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2283:25: warning: 2 adjacent parameters of 'read_tensor_as_f32' of similar type ('size_t') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+ 2283 |                         size_t src_size,
+      |                         ^~~~~~~~~~~~~~~~
+ 2284 |                         size_t n_elem,
+      |                         ~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2283:32: note: the first parameter in the range is 'src_size'
+ 2283 |                         size_t src_size,
+      |                                ^~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2284:32: note: the last parameter in the range is 'n_elem'
+ 2284 |                         size_t n_elem,
+      |                                ^~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2312:32: warning: 2 adjacent parameters of 'nemotron3_position_layout' of similar type ('uint64_t &') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+ 2312 |                                uint64_t & embedding,
+      |                                ^~~~~~~~~~~~~~~~~~~~~
+ 2313 |                                uint64_t & positions) {
+      |                                ~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2312:43: note: the first parameter in the range is 'embedding'
+ 2312 |                                uint64_t & embedding,
+      |                                           ^~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2313:43: note: the last parameter in the range is 'positions'
+ 2313 |                                uint64_t & positions) {
+      |                                           ^~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2618:25: warning: narrowing conversion from 'int64_t' (aka 'long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions]
+ 2618 |         const int kid = gguf_find_key(meta, "gemma4.audio.block_count");
+      |                         ^
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2623:17: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 2623 |                 std::snprintf(from, sizeof(from), "a.blk.%u.%s.weight", il, a);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2623:17: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2624:17: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 2624 |                 std::snprintf(to,   sizeof(to),   "a.blk.%u.%s.weight", il, b);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2624:17: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2922:17: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 2922 |                 std::snprintf(qn, sizeof(qn), "v.blk.%u.attn_q.weight", b);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2922:17: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2923:17: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 2923 |                 std::snprintf(kn, sizeof(kn), "v.blk.%u.attn_k.weight", b);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:2923:17: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3123:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 3123 |         std::snprintf(q,     sizeof(q),     "v.blk.%u.attn_q.weight",   b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3123:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3124:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 3124 |         std::snprintf(k,     sizeof(k),     "v.blk.%u.attn_k.weight",   b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3124:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3125:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 3125 |         std::snprintf(v,     sizeof(v),     "v.blk.%u.attn_v.weight",   b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3125:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3126:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 3126 |         std::snprintf(qb,    sizeof(qb),    "v.blk.%u.attn_q.bias",     b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3126:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3127:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 3127 |         std::snprintf(kb,    sizeof(kb),    "v.blk.%u.attn_k.bias",     b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3127:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3128:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 3128 |         std::snprintf(vb,    sizeof(vb),    "v.blk.%u.attn_v.bias",     b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3128:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3129:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 3129 |         std::snprintf(qkv_w, sizeof(qkv_w), "v.blk.%u.attn_qkv.weight", b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3129:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3130:9: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 3130 |         std::snprintf(qkv_b, sizeof(qkv_b), "v.blk.%u.attn_qkv.bias",   b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3130:9: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3175:31: warning: 2 adjacent parameters of 'operator()' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+ 3175 |                 auto rn = [&](const char * leaf_from, const char * leaf_to, const char * suffix) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3175:44: note: the first parameter in the range is 'leaf_from'
+ 3175 |                 auto rn = [&](const char * leaf_from, const char * leaf_to, const char * suffix) {
+      |                                            ^~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3175:68: note: the last parameter in the range is 'leaf_to'
+ 3175 |                 auto rn = [&](const char * leaf_from, const char * leaf_to, const char * suffix) {
+      |                                                                    ^~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3176:21: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 3176 |                     std::snprintf(from, sizeof(from), "v.deepstack_merger.%zu.%s.%s", i, leaf_from, suffix);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3176:21: note: cast the expression to void to silence this warning
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3177:21: warning: the value returned by this function should not be disregarded; neglecting it may lead to errors [cert-err33-c]
+ 3177 |                     std::snprintf(to,   sizeof(to),   "v.deepstack.%d.%s.%s", idx[i], leaf_to, suffix);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/lemon/Desktop/Projects/Ollama_Analysis/ollama/llama/compat/llama-ollama-compat.cpp:3177:21: note: cast the expression to void to silence this warning
