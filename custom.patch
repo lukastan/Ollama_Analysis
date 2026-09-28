@@ -1,0 +1,41 @@
+diff --git a/manifest/extra_test.go b/manifest/extra_test.go
+new file mode 100644
+index 00000000..7140d99f
+--- /dev/null
++++ b/manifest/extra_test.go
+@@ -0,0 +1,35 @@
++package manifest
++
++import (
++	"strings"
++	"testing"
++)
++
++func TestValidateDigest(t *testing.T) {
++	cases := []struct {
++		digest  string
++		wantErr bool
++	}{
++		{digest: "sha256:" + strings.Repeat("a", 64), wantErr: false},
++		{digest: "sha256-" + strings.Repeat("a", 64), wantErr: false},
++		{digest: "sha256:" + strings.Repeat("A", 64), wantErr: false},
++		{digest: "sha256:" + strings.Repeat("a", 63), wantErr: true},
++		{digest: "sha256:" + strings.Repeat("a", 65), wantErr: true},
++		{digest: "sha512:" + strings.Repeat("a", 64), wantErr: true},
++		{digest: "sha256_" + strings.Repeat("a", 64), wantErr: true},
++		{digest: "sha256:" + strings.Repeat("a", 63) + "g", wantErr: true},
++		{digest: "", wantErr: true},
++	}
++	for _, tt := range cases {
++		t.Run(tt.digest, func(t *testing.T) {
++			got := ValidateDigest(tt.digest)
++			if tt.wantErr != (got != nil) {
++				t.Errorf("ValidateDigest(%q) = %v; want %v", tt.digest, got, tt.wantErr)
++			}
++		})
++	}
++}
++
++func TestCase1(t *testing.T) {
++
++}
